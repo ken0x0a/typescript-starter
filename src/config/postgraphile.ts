@@ -43,11 +43,11 @@ export const options: PostGraphileOptions = {
   ...(!__DEV__ && {
     disableQueryLog: true,
   }),
-  ...(__DEV__ && {
-    graphiql: true,
-    graphiqlRoute: '/graphiql',
-    enhanceGraphiql: true,
-  }),
+  // ...(__DEV__ && {
+  //   graphiql: true,
+  //   graphiqlRoute: '/graphiql',
+  //   enhanceGraphiql: true,
+  // }),
 };
 
 export const postgraphileHandler = postgraphile(pgConfig, schemaName, options);

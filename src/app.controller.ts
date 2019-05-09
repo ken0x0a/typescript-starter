@@ -7,9 +7,10 @@ import {
   UseInterceptors,
   Req,
   Res,
+  Next,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { LoggingInterceptor } from './logging.interceptor';
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { BaseInterceptor } from './base.interceptor';
 import { postgraphileHandler } from './config/postgraphile';
 import { FastifyRequest as Request, FastifyReply as Response } from 'fastify';
@@ -51,36 +52,53 @@ export class AppController {
     return 'this should never appear';
   }
 
-  @Post('api2')
-  async postApi(@Req() req: Request, @Res() res: Response): Promise<string> {
+  @Post('api')
+  async postApi(
+    @Req() req: Request<any, any>,
+    @Res() res: Response<any>,
+    // @Next() next: any,
+  ): Promise<string> {
+    // return postgraphileHandler(req, res);
+
+    console.log({ req, res });
     console.log(req.body);
     // tslint:disable: max-line-length
     /**
      * https://github.com/graphile/postgraphile/blob/d3746988c46c3c62fa0f42e396264dad5e118c8a/src/postgraphile/http/createPostGraphileHttpRequestHandler.ts#L841
      * https://github.com/graphile/postgraphile/blob/d3746988c46c3c62fa0f42e396264dad5e118c8a/src/postgraphile/http/koaMiddleware.ts
      */
-    const ctx: PostGraphileFakeKoaContext = {
-      req,
-      res,
-      request: req,
-      response: {},
-    } as any;
+    // const ctx: PostGraphileFakeKoaContext = {
+    //   req,
+    //   res,
+    //   request: req,
+    //   response: {},
+    // } as any;
+    // const ctx: PostGraphileFakeKoaContext = {
+    //   req: req.raw,
+    //   res: res.res,
+    //   request: req.raw,
+    //   response: {},
+    // } as any;
     async function next(err?: Error): Promise<any> {
       console.error(err);
     }
-    try {
-      await postgraphileHandler(ctx, next);
 
-      asyncTask(ctx).catch(e => console.error(e));
+    res.end = body => {
+      res.body = body;
+    };
+    try {
+      await postgraphileHandler(req.raw, res, next);
+      console.log(res.body);
+      // asyncTask(ctx).catch(e => console.error(e));
       console.debug('postApi: called');
     } catch (err) {
       console.error(err);
     }
-    res
-      .code(201)
-      .header('Content-Type', 'application/json')
-      .send(ctx.response.body);
-    return ctx.response.body;
+    // res
+    //   .code(201)
+    //   .header('Content-Type', 'application/json')
+    //   .send(ctx.response.body);
+    return res.body;
   }
   @Get('timeout')
   async getTimeoutTest(): Promise<string> {
@@ -90,7 +108,7 @@ export class AppController {
 
   @Get('async')
   getWithAsyncTask(): string {
-    asyncTask({} as any).catch(e => console.error(e));
+    // asyncTask({} as any).catch(e => console.error(e));
     return 'Async task is on going';
   }
 

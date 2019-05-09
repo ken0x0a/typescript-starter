@@ -6,10 +6,11 @@ const fastify = Fastify({
   // logger: true,
 });
 
-fastify.use('/api', postgraphileHandler);
-fastify.use('/api', (req, res) => {
-  response.body;
-});
+// fastify.use('api', postgraphileHandler);
+// fastify.use('/api', (...args) => {
+//   console.warn(args);
+//   postgraphileHandler(...args);
+// });
 
 export { fastify };
 // fastify.post('/api', async (request, reply) => {

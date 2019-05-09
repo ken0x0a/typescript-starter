@@ -5,6 +5,7 @@ import { Response } from 'express';
 export class BaseMiddleware implements NestMiddleware {
   use(req: any, res: Response, next: () => void) {
     console.log('BaseMiddleware before');
+    // if (req.raw.)
     next();
 
     console.log('BaseMiddleware after');

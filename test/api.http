@@ -1,22 +1,23 @@
 @port = 3005
-@prefix = /api
+@prefix = /
+# @prefix = /api/
 
 ### 
-GET http://localhost:{{port}}{{prefix}}/ HTTP/1.1
+GET http://localhost:{{port}}{{prefix}} HTTP/1.1
 
 ### 
-GET http://localhost:{{port}}{{prefix}}/anyPath HTTP/1.1
+GET http://localhost:{{port}}{{prefix}}anyPath HTTP/1.1
 
 ### 
-GET http://localhost:{{port}}{{prefix}}/timeout HTTP/1.1
+GET http://localhost:{{port}}{{prefix}}timeout HTTP/1.1
 
 ### 
-GET http://localhost:{{port}}{{prefix}}/async HTTP/1.1
+GET http://localhost:{{port}}{{prefix}}async HTTP/1.1
 
 ### 
-GET http://localhost:{{port}}{{prefix}}/api HTTP/1.1
+GET http://localhost:{{port}}{{prefix}}api HTTP/1.1
 ### 
-POST http://localhost:{{port}}{{prefix}}/api HTTP/1.1
+POST http://localhost:{{port}}{{prefix}}api HTTP/1.1
 Content-Type: application/json
 
 {
@@ -24,10 +25,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:{{port}}{{prefix}}/post HTTP/1.1
+POST http://localhost:{{port}}{{prefix}}post HTTP/1.1
 
 ###
-POST http://localhost:{{port}}{{prefix}}/post HTTP/1.1
+POST http://localhost:{{port}}{{prefix}}post HTTP/1.1
 Content-Type: application/json
 Auth: Bearer this_is
 
