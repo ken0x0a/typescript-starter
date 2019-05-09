@@ -1,0 +1,8 @@
+@port = 3005
+
+### 
+GET http://localhost:{{port}}/auth/user/1 HTTP/1.1
+
+
+### 
+GET http://localhost:{{port}}/auth/login HTTP/1.1

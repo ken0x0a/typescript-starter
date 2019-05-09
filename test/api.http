@@ -1,0 +1,19 @@
+@port = 3005
+
+### 
+GET http://localhost:{{port}}/ HTTP/1.1
+
+### 
+GET http://localhost:{{port}}/anyPath HTTP/1.1
+
+###
+POST http://localhost:{{port}}/post HTTP/1.1
+
+###
+POST http://localhost:{{port}}/post HTTP/1.1
+Auth: Bearer this_is
+
+{
+  "json": "yey"
+}
+
