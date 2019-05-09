@@ -10,6 +10,17 @@ import { AppService } from './app.service';
 import { LoggingInterceptor } from './logging.interceptor';
 import { BaseInterceptor } from './base.interceptor';
 
+function sleep(second: number): Promise<void> {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, second);
+  });
+}
+async function asyncTask() {
+  await sleep(5000);
+  console.debug('ran after 5 second');
+}
 // @UseInterceptors(new BaseInterceptor())
 // @UseInterceptors(new LoggingInterceptor())
 @Controller()
@@ -22,12 +33,14 @@ export class AppController {
   }
   @Get('timeout')
   async getTimeoutTest(): Promise<string> {
-    const text = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve('text');
-      }, 10000);
-    });
-    return 'this should never appear' + text;
+    await sleep(10000);
+    return 'this should never appear';
+  }
+
+  @Get('async')
+  getWithAsyncTask(): string {
+    asyncTask().catch(e => console.error(e));
+    return 'Async task is on going';
   }
 
   @Post('')
