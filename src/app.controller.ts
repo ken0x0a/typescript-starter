@@ -20,9 +20,14 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-  @Get(':any')
-  getAny(@Param('any') path: string): string {
-    return `you requested ${path}`;
+  @Get('timeout')
+  async getTimeoutTest(): Promise<string> {
+    const text = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve('text');
+      }, 10000);
+    });
+    return 'this should never appear' + text;
   }
 
   @Post('')
@@ -33,5 +38,11 @@ export class AppController {
   @Post('post')
   async postPost(@Body() body: any): Promise<string> {
     return `hey! ${JSON.stringify(body, null, 2)}`;
+  }
+  @Get(':any')
+  getAny(@Param('any') path: string): string {
+    const res = `you requested ${path}`;
+    console.log(res);
+    return res;
   }
 }

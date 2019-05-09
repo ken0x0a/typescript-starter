@@ -6,6 +6,9 @@ GET http://localhost:{{port}}/ HTTP/1.1
 ### 
 GET http://localhost:{{port}}/anyPath HTTP/1.1
 
+### 
+GET http://localhost:{{port}}/timeout HTTP/1.1
+
 ###
 POST http://localhost:{{port}}/post HTTP/1.1
 
