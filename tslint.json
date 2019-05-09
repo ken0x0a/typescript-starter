@@ -13,6 +13,7 @@
     "interface-name": [false],
     "arrow-parens": false,
     "object-literal-sort-keys": false,
+    "semicolon": false,
     "no-console": false
   },
   "rulesDirectory": []

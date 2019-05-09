@@ -12,11 +12,11 @@ async function bootstrap() {
   app.useGlobalInterceptors(
     new BaseInterceptor(),
     new LoggingInterceptor(),
-    new TransformInterceptor(),
+    // new TransformInterceptor(),
     new TimeoutInterceptor(),
   );
   // app.use();
-  await app.listen(3005);
+  await app.listen(3005, '0.0.0.0');
   console.log('after');
 }
 bootstrap();
