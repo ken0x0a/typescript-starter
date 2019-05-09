@@ -5,10 +5,17 @@ import { LoggingInterceptor } from './logging.interceptor';
 import { BaseMiddleware } from './base.middleware';
 import { TransformInterceptor } from './transform.interceptor';
 import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 
 async function bootstrap() {
   console.log('before');
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+  );
   app.useGlobalInterceptors(
     new BaseInterceptor(),
     new LoggingInterceptor(),

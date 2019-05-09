@@ -8,6 +8,6 @@ export class BaseMiddleware implements NestMiddleware {
     next();
 
     console.log('BaseMiddleware after');
-    res.removeHeader('X-Powered-By');
+    // res.removeHeader('X-Powered-By');
   }
 }

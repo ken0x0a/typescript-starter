@@ -76,8 +76,10 @@ export class AppController {
     } catch (err) {
       console.error(err);
     }
-    res.setHeader('Content-Type', 'application/json');
-    res.status(res.statusCode).send(ctx.response.body);
+    res
+      .code(201)
+      .header('Content-Type', 'application/json')
+      .send(ctx.response.body);
     return ctx.response.body;
   }
   @Get('timeout')
