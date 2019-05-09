@@ -12,7 +12,7 @@ import { AppService } from './app.service';
 import { LoggingInterceptor } from './logging.interceptor';
 import { BaseInterceptor } from './base.interceptor';
 import { postgraphileHandler } from './config/postgraphile';
-import { Request, Response } from 'express';
+import { FastifyRequest as Request, FastifyReply as Response } from 'fastify';
 
 function sleep(second: number): Promise<void> {
   return new Promise(resolve => {
@@ -51,7 +51,7 @@ export class AppController {
     return 'this should never appear';
   }
 
-  @Post('api')
+  @Post('api2')
   async postApi(@Req() req: Request, @Res() res: Response): Promise<string> {
     console.log(req.body);
     // tslint:disable: max-line-length
@@ -94,7 +94,7 @@ export class AppController {
     return 'Async task is on going';
   }
 
-  @Post('')
+  @Post('hey')
   postRoot(): string {
     return 'hey!';
   }

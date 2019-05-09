@@ -9,13 +9,15 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { fastify } from './fastify';
 
 async function bootstrap() {
   console.log('before');
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter(fastify),
   );
+  app.setGlobalPrefix('api');
   app.useGlobalInterceptors(
     new BaseInterceptor(),
     new LoggingInterceptor(),
