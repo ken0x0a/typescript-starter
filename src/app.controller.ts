@@ -10,8 +10,8 @@ import {
   Next,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
-import { BaseInterceptor } from './base.interceptor';
+import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
+import { BaseInterceptor } from './common/interceptor/base.interceptor';
 import { postgraphileHandler } from './config/postgraphile';
 import { FastifyRequest as Request, FastifyReply as Response } from 'fastify';
 

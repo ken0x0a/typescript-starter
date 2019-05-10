@@ -6,6 +6,9 @@
 GET http://localhost:{{port}}{{prefix}} HTTP/1.1
 
 ### 
+GET http://localhost:3009/ HTTP/1.1
+
+### 
 GET http://localhost:{{port}}{{prefix}}anyPath HTTP/1.1
 
 ### 

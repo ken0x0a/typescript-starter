@@ -6,16 +6,16 @@ import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
 // import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { TimeoutInterceptor } from './common/interceptor/timeout.interceptor';
 import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
+  ExpressAdapter,
+  NestExpressApplication,
+} from '@nestjs/platform-express';
 import { fastify } from './fastify';
 
 async function bootstrap() {
   console.log('before');
-  const app = await NestFactory.create<NestFastifyApplication>(
+  const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
-    new FastifyAdapter(fastify),
+    new ExpressAdapter(fastify),
   );
   // app.setGlobalPrefix('api');
   app.useGlobalInterceptors(
