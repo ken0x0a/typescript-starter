@@ -5,18 +5,10 @@ import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
 // import { BaseMiddleware } from './base.middleware';
 // import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { TimeoutInterceptor } from './common/interceptor/timeout.interceptor';
-import {
-  ExpressAdapter,
-  NestExpressApplication,
-} from '@nestjs/platform-express';
-import { fastify } from './fastify';
 
 async function bootstrap() {
   console.log('before');
-  const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
-    new ExpressAdapter(fastify),
-  );
+  const app = await NestFactory.create(AppModule);
   // app.setGlobalPrefix('api');
   app.useGlobalInterceptors(
     new BaseInterceptor(),
